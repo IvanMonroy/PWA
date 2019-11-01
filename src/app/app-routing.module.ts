@@ -1,8 +1,32 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {VehicleComponent, EntriesComponent, ExitsComponent, RateComponent} from './pages/pages/vehicle'
 
-
-const routes: Routes = [];
+const routes: Routes = [{
+  path: "vehicles",
+  component: VehicleComponent,
+  data: { title: "Vehículos" }
+},
+{
+  path: "entries",
+  component: EntriesComponent,
+  data: { title: "Entradas" }
+},
+{
+  path: "exits",
+  component: ExitsComponent,
+  data: { title: "Salidas" }
+},
+{
+  path: "rates",
+  component: RateComponent,
+  data: { title: "Tarifas" }
+},
+{
+  path: "",
+  redirectTo: "/index",
+  pathMatch: "full"
+}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

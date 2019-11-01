@@ -1,0 +1,16 @@
+<mat-toolbar color="primary" class="example-toolbar">
+    <mat-toolbar-row>
+      <button mat-icon-button (click)="toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <h1 class="example-app-name">{{ title }}</h1>
+      <span class="example-spacer"></span>
+      <ng-container
+        *ngTemplateOutlet="
+          !medyaQueryParent.matches ? not_responsive : responsive
+        "
+      >
+      </ng-container>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
