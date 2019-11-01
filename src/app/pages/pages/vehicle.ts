@@ -38,7 +38,8 @@ const httpOptions = {
       <mat-list-item >
         <mat-icon mat-list-icon>directions_car</mat-icon>
         <h4 class="main_data" mat-line>{{product.plate}}</h4>
-        <p mat-line class="text-wrap"> {{product.brand + ', Cantidad entradas: ' + product.total_entries}} </p>
+        <p mat-line class="text-wrap"> {{ 'Marca: ' + product.brand}} </p>
+        <p mat-line class="text-wrap"> {{ 'Cantidad entradas: ' + product.total_entries}} </p>
       </mat-list-item>
     </div>
     </mat-list>

@@ -61,6 +61,11 @@ color: white;
   .mat-subheader{
     color: #c1c1c1 !important;
   }
-
+  .mat-bottom-sheet-container{
+    background-color: purple !important;
+}
+.mat-dialog-container {
+  background-color: purple !important;
+}
 
 @import "~bootstrap/dist/css/bootstrap.css"

@@ -14,15 +14,26 @@ import { FormsModule } from "@angular/forms";
 import { MatDialogModule } from "@angular/material/dialog";
 import { NavHeaderComponent } from './nav-header/nav-header.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import {SubMenuComponent, DialogOverviewExampleDialog, BottomSheetOverviewExampleSheet} from './nav-menu/sub-menu'
 
 @NgModule({
   declarations: [
     NavHeaderComponent,
-    NavMenuComponent
+    NavMenuComponent,
+    SubMenuComponent,
+    DialogOverviewExampleDialog,
+    BottomSheetOverviewExampleSheet
   ],
   exports: [
     NavHeaderComponent,
-    NavMenuComponent
+    NavMenuComponent,
+    SubMenuComponent,
+    DialogOverviewExampleDialog,
+    BottomSheetOverviewExampleSheet
+  ],
+  entryComponents:  [
+    DialogOverviewExampleDialog,
+    BottomSheetOverviewExampleSheet
   ],
   imports: [
     CommonModule,

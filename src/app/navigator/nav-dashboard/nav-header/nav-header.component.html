@@ -14,3 +14,20 @@
     </mat-toolbar-row>
   </mat-toolbar>
 
+
+  <ng-template #not_responsive>
+    <sub-menu [medyaQueryParent]="medyaQueryParent"></sub-menu>
+  </ng-template>
+  <ng-template #responsive>
+    <mat-menu #appMenu="matMenu">
+      <sub-menu [medyaQueryParent]="medyaQueryParent"></sub-menu>
+    </mat-menu>
+    <button mat-icon-button [matMenuTriggerFor]="appMenu">
+      <mat-icon
+        class="example-icon"
+        aria-hidden="false"
+        aria-label="menu icon"
+        >more_vert</mat-icon
+      >
+    </button>
+  </ng-template>
