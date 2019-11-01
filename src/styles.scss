@@ -1,15 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color:#303030; color: white;  }
-
-/* You can add global styles to this file, and also import other style files */
-*{
-   color: white;
+html, body {
+    height: 100%;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-color: #303030;
+    color: white;
+}
+
+/* You can add global styles to this file, and also import other style files */
+* {
+    color: white;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .example-container {
     display: flex;
@@ -19,53 +33,62 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     bottom: 0;
     left: 0;
     right: 0;
-  }
-  
-  .example-is-mobile .example-toolbar {
+}
+
+.example-is-mobile .example-toolbar {
     position: fixed;
+
     /* Make sure the toolbar will stay on top of the content as it scrolls past. */
     z-index: 2;
+}
 
-  }
-  
-  .mat-drawer.mat-drawer-side{
-background: #424242 !important;
-color: white;
-  }
+.mat-drawer.mat-drawer-side {
+    background: #424242 !important;
+    color: white;
+}
 
-  h1.example-app-name {
+h1.example-app-name {
     margin-left: 8px;
-  }
-  
-  .example-sidenav-container {
+}
+
+.example-sidenav-container {
     /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
        causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
     flex: 1;
-  }
-  
-  .example-is-mobile .example-sidenav-container {
+}
+
+.example-is-mobile .example-sidenav-container {
     /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
        `<body>` to be our scrolling element for mobile layouts. */
     flex: 1 0 auto;
-  }
+}
 
-  .example-spacer {
+.example-spacer {
     flex: 1 1 auto;
-  }
-  .mat-toolbar.mat-primary{
-    background-color: purple !important;
-  }
-  .active-list-item {
-    color: purple !important; /* Note: You could also use a custom theme */
-  }
-  .mat-subheader{
-    color: #c1c1c1 !important;
-  }
-  .mat-bottom-sheet-container{
-    background-color: purple !important;
-}
-.mat-dialog-container {
-  background-color: purple !important;
 }
 
-@import "~bootstrap/dist/css/bootstrap.css"
+.mat-toolbar.mat-primary {
+    background-color: purple !important;
+}
+
+.active-list-item {
+    color: purple !important; /* Note: You could also use a custom theme */
+}
+
+.mat-subheader {
+    color: #c1c1c1 !important;
+}
+
+.mat-bottom-sheet-container {
+    background-color: purple !important;
+}
+
+.mat-dialog-container {
+    background-color: purple !important;
+}
+
+.mat-drawer {
+    background-color: #424242;
+}
+
+@import "~bootstrap/dist/css/bootstrap.css";

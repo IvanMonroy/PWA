@@ -9,6 +9,8 @@ import {NavDashboardModule} from './navigator/nav-dashboard/nav-dashboard.module
 import {PagesModule} from './pages/pages.module'
 
 import { AppComponent } from './app.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +21,8 @@ import { AppComponent } from './app.component';
     MatSidenavModule,
     BrowserAnimationsModule,
     NavDashboardModule,
-    PagesModule
+    PagesModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]
