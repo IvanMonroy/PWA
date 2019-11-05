@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {VehicleComponent, EntriesComponent, ExitsComponent, RateComponent} from './pages/pages/vehicle'
+import {VehicleComponent, EntriesComponent, ExitsComponent, RateComponent, IndexComponent} from './pages/pages/vehicle'
 
 const routes: Routes = [{
   path: "vehicles",
@@ -24,8 +24,8 @@ const routes: Routes = [{
 },
 {
   path: "",
-  redirectTo: "/index",
-  pathMatch: "full"
+  component: IndexComponent,
+  data: { title: "Inicio" }
 }];
 
 @NgModule({

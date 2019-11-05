@@ -12,13 +12,42 @@ const httpOptions = {
   })
 };
 
+
+@Component({
+  selector: 'app-index',
+  template: `
+  <div class=" img-fluid jumbotron">
+  <h1 class="display-4">Bienvenido, HR Parking!</h1>
+  <p class="lead">Encuentra de manera fácil un espacio seguro para tu vehículo en la red de parqueaderos HR.</p>
+  <hr class="my-4">
+  <p>Disfruta de la experiencia de parquear en HR.</p>
+  <a class="btn btn-primary btn-lg" [routerLink]="['/entries']" role="button">Ingresa</a>
+</div>
+  `,
+  styleUrls: ["./index.scss"]
+
+})
+export class IndexComponent {
+  title = 'app';
+  model = 'vehicles';
+  color = 'primary';
+  mode = 'indeterminate';
+  value = 50;
+
+  constructor(
+  ) {
+    
+  }
+}
+
+
 @Component({
   selector: 'app-vehicle',
   template: `
   <div class="container-fluid">  
 <mat-form-field appearance="legacy">
 <mat-label class="span_color_black">Buscar por placa</mat-label>
-<input matInput [name]="filter" [formControl]="filter" placeholder="AAA-123" autocomplete="off">
+<input matInput [name]="filter" [formControl]="filter" placeholder="AAA-123" autocomplete="off" data-toggle="tooltip" data-placement="right" title="El formulario es sensible a máyusculas y mínusculas.">
 </mat-form-field>
 </div>
 
@@ -94,7 +123,7 @@ export class VehicleComponent implements OnDestroy {
   <div class="container-fluid">  
 <mat-form-field appearance="legacy">
 <mat-label class="span_color_black">Buscar por placa</mat-label>
-<input matInput [name]="filter" [formControl]="filter" placeholder="AAA-123" autocomplete="off">
+<input matInput [name]="filter" [formControl]="filter" placeholder="AAA-123" autocomplete="off" data-toggle="tooltip" data-placement="right" title="El formulario es sensible a máyusculas y mínusculas.">
 </mat-form-field>
 </div>
 
@@ -169,7 +198,7 @@ export class EntriesComponent implements OnDestroy {
   <div class="container-fluid">  
 <mat-form-field appearance="legacy">
 <mat-label class="span_color_black">Buscar por placa</mat-label>
-<input matInput [name]="filter" [formControl]="filter" placeholder="AAA-123" autocomplete="off">
+<input matInput [name]="filter" [formControl]="filter" placeholder="AAA-123" autocomplete="off" data-toggle="tooltip" data-placement="right" title="El formulario es sensible a máyusculas y mínusculas.">
 </mat-form-field>
 </div>
 
@@ -242,7 +271,7 @@ export class ExitsComponent implements OnDestroy {
   <div class="container-fluid">  
 <mat-form-field appearance="legacy">
 <mat-label class="span_color_black">Buscar por nombre</mat-label>
-<input matInput [name]="filter" [formControl]="filter" placeholder="Camionetas" autocomplete="off">
+<input matInput [name]="filter" [formControl]="filter" placeholder="Camionetas" autocomplete="off" data-toggle="tooltip" data-placement="right" title="El formulario es sensible a máyusculas y mínusculas.">
 </mat-form-field>
 </div>
 

@@ -1,8 +1,8 @@
 {
   "name": "pwa-api",
   "short_name": "pwa-api",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "theme_color": "#303030",
+  "background_color": "#303030",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
@@ -48,5 +48,11 @@
       "type": "image/png"
     }
   ],
-  "ivanchi": "iavsn"
+  "images": [
+    {
+      "src": "assets/icons/night_city_city_lights_underground_136558_1920x1080.jpg",
+      "sizes": "1920x1080",
+      "type": "image/jpg"
+    }
+  ]
 }

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from '../app-routing.module'
 import {GlobalThingsService} from '../services/global/global-things.service'
 import {MatProgressSpinnerModule,MatIconModule,MatListModule,MatFormFieldModule,MatInputModule } from '@angular/material';
-import {VehicleComponent, EntriesComponent, ExitsComponent, RateComponent} from './pages/vehicle'
+import {VehicleComponent, EntriesComponent, ExitsComponent, RateComponent, IndexComponent} from './pages/vehicle'
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'; 
 
@@ -13,13 +13,15 @@ import { HttpClientModule } from '@angular/common/http';
     VehicleComponent,
     EntriesComponent,
     ExitsComponent,
-    RateComponent
+    RateComponent,
+    IndexComponent
   ],
   exports: [
     VehicleComponent,
     EntriesComponent,
     ExitsComponent,
-    RateComponent
+    RateComponent,
+    IndexComponent,
   ],
   imports: [
     CommonModule,
