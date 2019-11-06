@@ -1,11 +1,17 @@
 {
+  "dir": "ltr",
+  "lang": "en",
   "name": "pwa-api",
   "short_name": "pwa-api",
-  "theme_color": "#303030",
-  "background_color": "#303030",
-  "display": "standalone",
   "scope": "/",
+  "display": "fullscreen",
   "start_url": "/",
+  "theme_color": "#303030",
+  "description": "Sample PWA App",
+  "orientation": "any",
+  "background_color": "#303030",
+  "related_applications": [],
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",
