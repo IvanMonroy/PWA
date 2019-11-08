@@ -39,6 +39,9 @@
           "ngswConfigPath": "ngsw-config.json",
           "configurations": {
             "production": {
+              "serviceWorker": true,
+              "buildOptimizer": true,
+              "ngswConfigPath": "ngsw-config.json",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -132,6 +135,10 @@
               "devServerTarget": "pwa-api:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
     }

@@ -7,7 +7,7 @@ import { retry, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class GlobalThingsService {
-  baseurl =  'http://powerful-brushlands-67246.herokuapp.com/api/';
+  baseurl =  'https://powerful-brushlands-67246.herokuapp.com/api/';
   
   // Base url
 
