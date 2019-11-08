@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1573227218739,
+  "timestamp": 1573227776315,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -10,8 +10,8 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main-es2015.aaa9136784c2fce553ab.js",
-        "/main-es5.aaa9136784c2fce553ab.js",
+        "/main-es2015.5d391551b6a7889bb9ee.js",
+        "/main-es5.5d391551b6a7889bb9ee.js",
         "/manifest.webmanifest",
         "/polyfills-es2015.0ef207fb7b4761464817.js",
         "/polyfills-es5.2b9ce34c123ac007a8ba.js",
@@ -52,9 +52,9 @@
     "/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
     "/assets/icons/night_city_city_lights_underground_136558_1920x1080.jpg": "a3cf574f305a9c328c45be5748430d099d968a2a",
     "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/index.html": "b63f8997d83c5c7b1e7190ed959fe262b199634a",
-    "/main-es2015.aaa9136784c2fce553ab.js": "eb3b047def86f6c0e35c4ad25f4dccb93d342557",
-    "/main-es5.aaa9136784c2fce553ab.js": "45f20c89c2b7a10ff5d9822d3d3a44979d5923f3",
+    "/index.html": "13b1830bcfe29985757af46e80789de036a33857",
+    "/main-es2015.5d391551b6a7889bb9ee.js": "39250fcd2db27fcf630bfd9314a4e23f9ac5fc52",
+    "/main-es5.5d391551b6a7889bb9ee.js": "f23baef23d4763541fafb30ae38f5a89e41eb259",
     "/manifest.webmanifest": "0414cc814c6860d2028f8f3965a4b6f5749351e4",
     "/night_city_city_lights_underground_136558_1920x1080.037fb4d3e74203f5fecc.jpg": "a3cf574f305a9c328c45be5748430d099d968a2a",
     "/polyfills-es2015.0ef207fb7b4761464817.js": "cf5cbfa9134716054fb479ab21362146cdf1f2ff",
