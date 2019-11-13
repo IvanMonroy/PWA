@@ -67,7 +67,7 @@ const httpOptions = {
 
 <div class="col-md-3">
 <div class="circle">
- <p> {{statistics.vehicles}} </p>
+ <p> {{statistics.rates}} </p>
 </div>
 <small>Tarifas para tí.</small>
 </div>
@@ -208,7 +208,7 @@ export class IndexComponent implements OnDestroy {
   color = 'primary';
   mode = 'indeterminate';
   value = 50;
-  statistics =  [];
+  statistics: any;
   subscription: SubscriptionLike;
   constructor(
     private dashboardService: DashboardService,
