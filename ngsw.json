@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1573243478762,
+  "timestamp": 1573654759522,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -24,7 +24,15 @@
         "/assets/icons/icon-72x72.png",
         "/assets/icons/icon-96x96.png",
         "/assets/icons/night_city_city_lights_underground_136558_1920x1080.jpg",
-        "/night_city_city_lights_underground_136558_1920x1080.037fb4d3e74203f5fecc.jpg"
+        "/assets/index_images/Active8me-Save-Time-Healthy-Living-Hacks-for-Busy-People.jpg",
+        "/assets/index_images/clean.jpg",
+        "/assets/index_images/easy.jpg",
+        "/assets/index_images/parking.jpg",
+        "/assets/index_images/save-money.jpg",
+        "/assets/index_images/save-on-pig.jpg",
+        "/assets/index_images/save.jpg",
+        "/assets/index_images/shutterstock_601718561.jpg",
+        "/assets/index_images/siempre-contigo.jpg"
       ],
       "patterns": []
     }
@@ -40,7 +48,15 @@
     "/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
     "/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
     "/assets/icons/night_city_city_lights_underground_136558_1920x1080.jpg": "a3cf574f305a9c328c45be5748430d099d968a2a",
-    "/night_city_city_lights_underground_136558_1920x1080.037fb4d3e74203f5fecc.jpg": "a3cf574f305a9c328c45be5748430d099d968a2a"
+    "/assets/index_images/Active8me-Save-Time-Healthy-Living-Hacks-for-Busy-People.jpg": "8e840221520d793ab3356f08116195428a63356e",
+    "/assets/index_images/clean.jpg": "4eb4d29ec5db90d17b54e1786306e94d51751f9e",
+    "/assets/index_images/easy.jpg": "3b654568d046c8cea0e3fbfa1dd21b2e80b68e48",
+    "/assets/index_images/parking.jpg": "95667fdb27a0e51af2a118238671b5f1b71acfc7",
+    "/assets/index_images/save-money.jpg": "82f2bc964f89cddee0447756afaafe91e6911929",
+    "/assets/index_images/save-on-pig.jpg": "e64a3a888418b4bb2db540b84814fe66b2e32fdc",
+    "/assets/index_images/save.jpg": "2710577a549f2c9ca7c94099551ca79c4d9ec291",
+    "/assets/index_images/shutterstock_601718561.jpg": "d478769b2f3576cb8617104570da71f9bf487be6",
+    "/assets/index_images/siempre-contigo.jpg": "85ef8f03c72ac092f84dc47c7824c6e15347d3e1"
   },
   "navigationUrls": [
     {
