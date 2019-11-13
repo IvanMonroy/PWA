@@ -2,6 +2,8 @@ import { Component, Input, OnDestroy } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable, combineLatest, SubscriptionLike } from 'rxjs';
 import { GlobalThingsService } from '../../services/global/global-things.service';
+import { DashboardService } from '../../services/customizing/dashboard.service';
+
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 
@@ -21,23 +23,207 @@ const httpOptions = {
   <p class="lead">Encuentra de manera fácil un espacio seguro para tu vehículo en la red de parqueaderos HR.</p>
   <hr class="my-4">
   <p>Disfruta de la experiencia de parquear en HR.</p>
-  <a class="btn btn-primary btn-lg" [routerLink]="['/entries']" role="button">Ingresa</a>
+  <button class="button btn btn-primary btn-lg">
+  <mat-icon class="first-icon" mat-list-icon [routerLink]="['/entries']" role="button" >reply</mat-icon>  
+  <mat-icon class="second-icon" mat-list-icon [routerLink]="['/entries']" role="button" >reply_all</mat-icon>  
+</button>
+</div>
+
+<div class="container-fluid"> 
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12  d-inline-flex">
+<ul class="list-unstyled">
+  <li class="media">
+  <mat-icon class="mr-3" mat-list-icon>whatshot</mat-icon>  
+    <div class="media-body">
+      <h5 class="mt-0 mb-1">Muchas personas ya usan ParkingIHR</h5>
+
+    </div>
+  </li>
+</ul>
+</div>
+</div>
+
+<div class="container-fluid d-inline-flex text-center" style="margin-bottom: 2rem;">
+<div class="col-md-3">
+<div class="circle">
+ <p> {{statistics.vehicles}}  </p>
+</div>
+<small> Vehículos con nosotros. </small>
+</div>
+
+<div class="col-md-3">
+<div class="circle">
+ <p> {{statistics.entries}} </p>
+</div>
+<small>Entradas registradas.</small>
+</div>
+
+<div class="col-md-3">
+<div class="circle">
+ <p> {{statistics.exits}} </p>
+</div>
+<small>Salidas exitosas.</small>
+</div>
+
+<div class="col-md-3">
+<div class="circle">
+ <p> {{statistics.vehicles}} </p>
+</div>
+<small>Tarifas para tí.</small>
+</div>
+</div>
+
+<div class=" img-fluid jumbotron jumbotron_1 text-right">
+<h1 class="display-4">Bienvenido, HR Parking!</h1>
+<p class="lead">Encuentra de manera fácil un espacio seguro para tu vehículo en la red de parqueaderos HR.</p>
+<hr class="my-4">
+<p>Disfruta de la experiencia de parquear en HR.</p>
+<button class="button btn btn-primary btn-lg">
+<mat-icon class="first-icon" mat-list-icon [routerLink]="['/entries']" role="button" >reply</mat-icon>  
+<mat-icon class="second-icon" mat-list-icon [routerLink]="['/entries']" role="button" >reply_all</mat-icon>  
+</button>
+</div>
+
+
+<div class="container-fluid"> 
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12  d-inline-flex">
+<ul class="list-unstyled">
+  <li class="media">
+  <mat-icon class="mr-3" mat-list-icon>star</mat-icon>  
+    <div class="media-body">
+      <h5 class="mt-0 mb-1">Conoce más sobre nosotros</h5>
+    </div>
+  </li>
+</ul>
+</div>
+</div>
+
+<div class="container-fluid"> 
+<div class="card col-xl-3 col-lg-4 col-md-5 col-sm-6 d-inline-flex" >
+  <img src="../../../assets/index_images/shutterstock_601718561.jpg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">DESPREOCÚPATE </h5>
+    <p class="card-text">Con nuestra red de parqueaderos privados, te garantizamos la seguridad de tu vehículo.</p>
+    <button class="button btn btn-primary btn-lg">
+  <mat-icon class="first-icon" mat-list-icon  role="button" >add</mat-icon>  
+  <mat-icon class="second-icon" mat-list-icon  role="button" >clear</mat-icon>  
+</button>
+  </div>
+</div>
+
+<div class="card col-xl-3 col-lg-4 col-md-5 col-sm-6 d-inline-flex" >
+  <img src="../../../assets/index_images/Active8me-Save-Time-Healthy-Living-Hacks-for-Busy-People.jpg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">DÓNDE Y CUANDO QUIERAS</h5>
+    <p class="card-text">No des más vueltas buscando parqueadero, con Queo elije donde estacionarte y vive una mejor experiencia.</p>
+    <button class="button btn btn-primary btn-lg">
+  <mat-icon class="first-icon" mat-list-icon  role="button" >add</mat-icon>  
+  <mat-icon class="second-icon" mat-list-icon  role="button" >clear</mat-icon>  
+</button>
+  </div>
+  </div>
+
+  <div class="card col-xl-3 col-lg-4 col-md-5 col-sm-6 d-inline-flex" >
+  <img src="../../../assets/index_images/save-money.jpg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">AHORRA SIEMPRE</h5>
+    <p class="card-text">Haz parte de nuestra red y gana dinero arrendando tu parqueadero.</p>
+    <button class="button btn btn-primary btn-lg">
+  <mat-icon class="first-icon" mat-list-icon  role="button" >add</mat-icon>  
+  <mat-icon class="second-icon" mat-list-icon  role="button" >clear</mat-icon>  
+</button>
+  </div>
+  </div>
+
+  <div class="card col-xl-3 col-lg-4 col-md-5 col-sm-6 d-inline-flex" >
+  <img src="../../../assets/index_images/siempre-contigo.jpg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">SIEMPRE CONTIGO</h5>
+    <p class="card-text">Nuestras tarifas son menores a las de los parqueaderos convencionales.</p>
+    <button class="button btn btn-primary btn-lg">
+  <mat-icon class="first-icon" mat-list-icon  role="button" >add</mat-icon>  
+  <mat-icon class="second-icon" mat-list-icon  role="button" >clear</mat-icon>  
+</button>
+  </div>
+  </div>
+
+  <div class="card col-xl-3 col-lg-4 col-md-5 col-sm-6 d-inline-flex" >
+  <img src="../../../assets/index_images/easy.jpg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">FÁCIL</h5>
+    <p class="card-text">Ubica el parqueadero, paga en línea y estaciona.</p>
+    <button class="button btn btn-primary btn-lg">
+  <mat-icon class="first-icon" mat-list-icon  role="button" >add</mat-icon>  
+  <mat-icon class="second-icon" mat-list-icon  role="button" >clear</mat-icon>  
+</button>
+  </div>
+  </div>
+
+  <div class="card col-xl-3 col-lg-4 col-md-5 col-sm-6 d-inline-flex" >
+  <img src="../../../assets/index_images/parking.jpg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">SEIMPRE PENSANDO EN TÍ</h5>
+    <p class="card-text">En Parking tu bici es bienvenida. Tenemos el sello calidad bici oro en 3 de nuestros estacionamientos.</p>
+    <button class="button btn btn-primary btn-lg">
+  <mat-icon class="first-icon" mat-list-icon [routerLink]="['/entries']" role="button" >add</mat-icon>  
+  <mat-icon class="second-icon" mat-list-icon [routerLink]="['/entries']" role="button" >clear</mat-icon>  
+</button>
+  </div>
+  </div>
+
+  <div class="card col-xl-3 col-lg-4 col-md-5 col-sm-6 d-inline-flex" >
+  <img src="../../../assets/index_images/easy.jpg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">MEJOR QUE COMO LO DEJASTE</h5>
+    <p class="card-text">Te ofrecemos en varios de nuestros parqueaderos la oportunidad de lavar tu carro mientras está bajo nuestro cuidado. Disfruta de este servicio y no te arrepentirás.
+    </p>
+    <button class="button btn btn-primary btn-lg">
+  <mat-icon class="first-icon" mat-list-icon role="button" >add</mat-icon>  
+  <mat-icon class="second-icon" mat-list-icon role="button" >clear</mat-icon>  
+</button>
+  </div>
+  </div>
+
+  <div class="card col-xl-3 col-lg-4 col-md-5 col-sm-6 d-inline-flex" >
+  <img src="../../../assets/index_images/save.jpg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">NO TE PREOCUPES POR TU CARRO </h5>
+    <p class="card-text">Parking resuelve ese problema. Contamos con un equipo profesional y tecnología de punta para prestar un servicio de Valet Parking con responsabilidad.
+    </p>
+    <button class="button btn btn-primary btn-lg">
+  <mat-icon class="first-icon" mat-list-icon role="button" >add</mat-icon>  
+  <mat-icon class="second-icon" mat-list-icon role="button" >clear</mat-icon>  
+</button>
+  </div>
+  </div>
+
 </div>
   `,
   styleUrls: ["./index.scss"]
 
 })
-export class IndexComponent {
+export class IndexComponent implements OnDestroy {
   title = 'app';
   model = 'vehicles';
   color = 'primary';
   mode = 'indeterminate';
   value = 50;
-
+  statistics =  [];
+  subscription: SubscriptionLike;
   constructor(
+    private dashboardService: DashboardService,
+    private http: HttpClient,
   ) {
-    
+   this.subscription =  this.dashboardService.getMethod().subscribe((data: any[])=>{
+      console.log(data['data'][0]);
+      this.statistics = data['data'][0];
+    })  
   }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+    console.log(this.subscription.closed);
+  }
+
 }
 
 

@@ -5,3 +5,91 @@ background-image: url("../../../assets/icons/night_city_city_lights_underground_
     background-color: purple;
     border-color: purple;
 }
+
+.button {
+    background-color: purple;
+    height: 56px;
+    width: 56px;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28);
+    box-sizing: content-box;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    position: relative;
+    -webkit-transform: scale(1) rotate(360deg);
+    transform: scale(1) rotate(360deg);
+    -webkit-transition: -webkit-transform 150ms cubic-bezier(.4, 0, 1, 1);
+    transition: transform 150ms cubic-bezier(.4, 0, 1, 1);
+}
+.button:hover {
+    box-shadow: 0 0 6px rgba(0, 0, 0, .16), 0 6px 12px rgba(0, 0, 0, .32);
+    -webkit-transition: box-shadow 150ms cubic-bezier(0, 0, .2, 1);
+    transition: box-shadow 150ms cubic-bezier(0, 0, .2, 1);
+}
+.icon {
+    background-size: 24px;
+    display: block;
+    height: 24px;
+    margin: auto;
+    width: 24px;
+}
+.second-icon, .first-icon {
+    left: 0;
+    margin-left: 16px;
+    margin-top: 16px;
+    position: absolute;
+    top: 0;
+    -webkit-transition: all .2s cubic-bezier(.4, 0, .2, 1);
+    transition: all .2s cubic-bezier(.4, 0, .2, 1);
+}
+.second-icon, .button:hover .first-icon {
+    opacity: 0;
+    -webkit-transform: rotate(225deg);
+    transform: rotate(225deg);
+}
+.button:hover .second-icon {
+    opacity: 1;
+    visibility: visible;
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+}
+.card{
+    background-color: transparent !important;
+}
+
+.circle {
+    background: purple;
+    border-radius: 200px;
+    color: white;
+    height: 6rem;
+    font-weight: bold;
+    width: 6rem;
+    display: table;
+    margin: 10px auto;
+    text-align: center;
+    vertical-align: middle;
+    box-shadow:  0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
+    -moz-box-shadow:  0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
+    -webkit-box-shadow:  0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
+    -o-box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
+}
+.circle:hover {
+    background: rgb(151, 11, 151);
+    height: 6.5rem;
+    width: 6.5rem;
+   cursor: pointer;
+    box-shadow:  0 0 5px rgba(0, 0, 0, 0.14), 0 5px 9px rgba(0, 0, 0, 0.28);
+    -moz-box-shadow:  0 0 5px rgba(0, 0, 0, 0.14), 0 5px 9px rgba(0, 0, 0, 0.28);
+    -webkit-box-shadow:  0 0 5px rgba(0, 0, 0, 0.14), 0 5px 9px rgba(0, 0, 0, 0.28);
+    -o-box-shadow: 0 0 5px rgba(0, 0, 0, 0.14), 0 5px 9px rgba(0, 0, 0, 0.28);
+}
+.circle p {
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.jumbotron_1 {
+    background-image: url("../../../assets/index_images/save-on-pig.jpg")0% no-repeat fixed !important
+    }
