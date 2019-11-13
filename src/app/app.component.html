@@ -1,27 +1,17 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
   <app-nav-header (toggleEmit)="emitAction($event)" [medyaQueryParent]="mobileQuery"></app-nav-header>
-  <mat-sidenav-container
-    class="example-sidenav-container"
-    [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
-  >
-    <mat-sidenav
-      #sidenav
-      [mode]="mobileQuery.matches ? 'over' : 'side'"
-      [fixedInViewport]="mobileQuery.matches"
-      fixedTopGap="56"
-      (click)="sidenav.toggle()"
-    >
+  <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #sidenav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56" (click)="sidenav.toggle()">
       <app-nav-menu></app-nav-menu>
     </mat-sidenav>
     <mat-sidenav-content>
       <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
-</div>
-<footer class="page-footer font-small">
+  <footer class="page-footer font-small blue">
     <div class="footer-copyright text-center py-3">© 2019 Copyright:
       <a href="https://github.com/IvanMonroy"> Iván Monroy</a>
-    </div>  
-</footer>
-
-
+    </div>
+  </footer>
+</div>

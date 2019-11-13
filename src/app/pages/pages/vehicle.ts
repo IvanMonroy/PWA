@@ -18,7 +18,7 @@ const httpOptions = {
 @Component({
   selector: 'app-index',
   template: `
-  <div class=" img-fluid jumbotron">
+  <div class=" img-fluid jumbotron" style="background: url('../../../assets/icons/night_city_city_lights_underground_136558_1920x1080.jpg')fixed" >
   <h1 class="display-4">Bienvenido, HR Parking!</h1>
   <p class="lead">Encuentra de manera fácil un espacio seguro para tu vehículo en la red de parqueaderos HR.</p>
   <hr class="my-4">
@@ -43,29 +43,29 @@ const httpOptions = {
 </div>
 </div>
 
-<div class="container-fluid d-inline-flex text-center" style="margin-bottom: 2rem;">
-<div class="col-md-3">
+<div class="container-fluid " style="margin-bottom: 2rem;">
+<div class="card col-xl-3 col-lg-4 col-md-5 col-sm-6 d-inline-flex text-center">
 <div class="circle">
  <p> {{statistics.vehicles}}  </p>
 </div>
 <small> Vehículos con nosotros. </small>
 </div>
 
-<div class="col-md-3">
+<div class="card col-xl-3 col-lg-4 col-md-5 col-sm-6 d-inline-flex text-center">
 <div class="circle">
  <p> {{statistics.entries}} </p>
 </div>
 <small>Entradas registradas.</small>
 </div>
 
-<div class="col-md-3">
+<div class="card col-xl-3 col-lg-4 col-md-5 col-sm-6 d-inline-flex text-center">
 <div class="circle">
  <p> {{statistics.exits}} </p>
 </div>
 <small>Salidas exitosas.</small>
 </div>
 
-<div class="col-md-3">
+<div class="card col-xl-3 col-lg-4 col-md-5 col-sm-6 d-inline-flex text-center">
 <div class="circle">
  <p> {{statistics.rates}} </p>
 </div>
@@ -73,14 +73,13 @@ const httpOptions = {
 </div>
 </div>
 
-<div class=" img-fluid jumbotron jumbotron_1 text-right">
-<h1 class="display-4">Bienvenido, HR Parking!</h1>
-<p class="lead">Encuentra de manera fácil un espacio seguro para tu vehículo en la red de parqueaderos HR.</p>
-<hr class="my-4">
-<p>Disfruta de la experiencia de parquear en HR.</p>
+<div class=" img-fluid jumbotron text-right" style="background: url('../../../assets/index_images/save-on-pig.jpg') fixed;">
+<h1 class="display-4">Más formas de ahorrar!</h1>
+<p class="lead">Con nuestras tarifas no tienes que preocuparte por pagar un peso de más.</p>
+<p>Conoce más sobre nuestras tarifas.</p>
 <button class="button btn btn-primary btn-lg">
-<mat-icon class="first-icon" mat-list-icon [routerLink]="['/entries']" role="button" >reply</mat-icon>  
-<mat-icon class="second-icon" mat-list-icon [routerLink]="['/entries']" role="button" >reply_all</mat-icon>  
+<mat-icon class="first-icon" mat-list-icon [routerLink]="['/entries']" role="button" >monetization_on</mat-icon>  
+<mat-icon class="second-icon" mat-list-icon [routerLink]="['/entries']" role="button" >loyalty</mat-icon>  
 </button>
 </div>
 
@@ -245,6 +244,10 @@ export class IndexComponent implements OnDestroy {
 </div>
 
 
+<a href="#" class="float">
+<mat-icon class="my-float" mat-list-icon>add</mat-icon> 
+</a>
+
 <div *ngIf="undefined !== vehiclesFiltered" class="container-fluid">
 <div class="row">  
 <mat-list class="col-12">
@@ -320,6 +323,9 @@ export class VehicleComponent implements OnDestroy {
 </div>
 </div>
 
+<a href="#" class="float">
+<mat-icon class="my-float" mat-list-icon>add</mat-icon> 
+</a>
 
 <div *ngIf="undefined !== entriesFiltered" class="container-fluid">
 <div class="row">  
@@ -395,6 +401,9 @@ export class EntriesComponent implements OnDestroy {
 </div>
 </div>
 
+<a href="#" class="float">
+<mat-icon class="my-float" mat-list-icon>add</mat-icon> 
+</a>
 
 <div *ngIf="undefined !== exitsFiltered" class="container-fluid">
 <div class="row">  
@@ -468,6 +477,9 @@ export class ExitsComponent implements OnDestroy {
 </div>
 </div>
 
+<a href="#" class="float">
+<mat-icon class="my-float" mat-list-icon>add</mat-icon> 
+</a>
 
 <div *ngIf="undefined !== ratesFiltered" class="container-fluid">
 <div class="row">  
