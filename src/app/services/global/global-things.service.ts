@@ -22,7 +22,7 @@ export class GlobalThingsService {
 
   // POST
   CreateModel(model,data): Observable<any[]> {
-    return this.http.post<any[]>(this.baseurl + '/' + model + '/', JSON.stringify(data), this.httpOptions)
+    return this.http.post<any[]>(this.baseurl + '/' + model + '/', data, this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.errorHandl)

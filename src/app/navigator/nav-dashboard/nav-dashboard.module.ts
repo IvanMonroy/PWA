@@ -14,7 +14,7 @@ import { FormsModule } from "@angular/forms";
 import { MatDialogModule } from "@angular/material/dialog";
 import { NavHeaderComponent } from './nav-header/nav-header.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import {SubMenuComponent, DialogOverviewExampleDialog, BottomSheetOverviewExampleSheet} from './nav-menu/sub-menu'
+import {SubMenuComponent, DialogOverviewExampleDialog, BottomSheetOverviewExampleSheet, MessageResponse} from './nav-menu/sub-menu'
 
 @NgModule({
   declarations: [
@@ -22,18 +22,21 @@ import {SubMenuComponent, DialogOverviewExampleDialog, BottomSheetOverviewExampl
     NavMenuComponent,
     SubMenuComponent,
     DialogOverviewExampleDialog,
-    BottomSheetOverviewExampleSheet
+    BottomSheetOverviewExampleSheet,
+    MessageResponse
   ],
   exports: [
     NavHeaderComponent,
     NavMenuComponent,
     SubMenuComponent,
     DialogOverviewExampleDialog,
-    BottomSheetOverviewExampleSheet
+    BottomSheetOverviewExampleSheet,
+    MessageResponse
   ],
   entryComponents:  [
     DialogOverviewExampleDialog,
-    BottomSheetOverviewExampleSheet
+    BottomSheetOverviewExampleSheet,
+    MessageResponse
   ],
   imports: [
     CommonModule,

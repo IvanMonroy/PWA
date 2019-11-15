@@ -1,28 +1,39 @@
-.float{
+.float {
     cursor: pointer;
-	position:fixed;
-	width:60px;
-	height:60px;
-	bottom:40px;
-	right:40px;
-	background-color:purple;
-	border-radius:50px;
-	text-align:center;
-    box-shadow:  0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
-    -moz-box-shadow:  0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
-    -webkit-box-shadow:  0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    background-color: purple;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
+    -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
+    -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
     -o-box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
+    z-index: 2;
 }
 
-.float:hover{
-	background-color:rgb(145, 10, 145);
-    box-shadow:  0 0 5px rgba(0, 0, 0, 0.14), 0 5px 9px rgba(0, 0, 0, 0.28);
-    -moz-box-shadow:  0 0 5px rgba(0, 0, 0, 0.14), 0 5px 9px rgba(0, 0, 0, 0.28);
-    -webkit-box-shadow:  0 0 5px rgba(0, 0, 0, 0.14), 0 5px 9px rgba(0, 0, 0, 0.28);
+#delete {
+    font-size: 18px !important;
+}
+
+#delete:hover {
+    font-size: 20px;
+    color: red;
+    cursor: pointer;
+}
+
+.float:hover {
+    background-color: rgb(145, 10, 145);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.14), 0 5px 9px rgba(0, 0, 0, 0.28);
+    -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.14), 0 5px 9px rgba(0, 0, 0, 0.28);
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.14), 0 5px 9px rgba(0, 0, 0, 0.28);
     -o-box-shadow: 0 0 5px rgba(0, 0, 0, 0.14), 0 5px 9px rgba(0, 0, 0, 0.28);
     cursor: pointer;
 }
 
-.my-float{
-	margin-top:18px;
+.my-float {
+    margin-top: 18px;
 }

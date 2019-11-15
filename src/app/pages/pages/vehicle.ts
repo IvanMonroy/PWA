@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable, combineLatest, SubscriptionLike } from 'rxjs';
 import { GlobalThingsService } from '../../services/global/global-things.service';
@@ -6,6 +6,8 @@ import { DashboardService } from '../../services/customizing/dashboard.service';
 
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
+import { MatDialog } from '@angular/material';
+import { PagesFormsComponent } from '../pages-forms/pages-forms/pages-forms.component';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -207,17 +209,18 @@ export class IndexComponent implements OnDestroy {
   color = 'primary';
   mode = 'indeterminate';
   value = 50;
-  statistics: any;
+  statistics = [];
   subscription: SubscriptionLike;
   constructor(
     private dashboardService: DashboardService,
     private http: HttpClient,
   ) {
-   this.subscription =  this.dashboardService.getMethod().subscribe((data: any[])=>{
+    this.subscription = this.dashboardService.getMethod().subscribe((data: any[]) => {
       console.log(data['data'][0]);
       this.statistics = data['data'][0];
-    })  
+    })
   }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
     console.log(this.subscription.closed);
@@ -244,7 +247,7 @@ export class IndexComponent implements OnDestroy {
 </div>
 
 
-<a href="#" class="float">
+<a (click)="openDialog()" class="float">
 <mat-icon class="my-float" mat-list-icon>add</mat-icon> 
 </a>
 
@@ -255,7 +258,7 @@ export class IndexComponent implements OnDestroy {
       <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6  d-inline-flex" *ngFor="let product of vehiclesFiltered | async" style="margin-bottom: 1.5rem;">
       <mat-list-item >
         <mat-icon mat-list-icon>directions_car</mat-icon>
-        <h4 class="main_data" mat-line>{{product.plate}}</h4>
+        <h4 class="main_data" mat-line>{{product.plate}} <small><mat-icon id="delete" (click)="deleteVehicle(product.id)">delete_outline</mat-icon></small></h4>
         <p mat-line class="text-wrap"> {{ 'Marca: ' + product.brand}} </p>
         <p mat-line class="text-wrap"> {{ 'Cantidad entradas: ' + product.total_entries}} </p>
       </mat-list-item>
@@ -267,7 +270,7 @@ export class IndexComponent implements OnDestroy {
   styleUrls: ["./pages.scss"]
 
 })
-export class VehicleComponent implements OnDestroy {
+export class VehicleComponent implements OnInit, OnDestroy {
   title = 'app';
   vehicles: Observable<any[]>;
   vehiclesFiltered: Observable<any[]>;
@@ -278,15 +281,18 @@ export class VehicleComponent implements OnDestroy {
   mode = 'indeterminate';
   value = 50;
   subscription: SubscriptionLike;
+  newVehicle: Observable<any[]>;
 
   constructor(
     private globalService: GlobalThingsService,
     private http: HttpClient,
-
+    public dialog: MatDialog
   ) {
+  }
+
+  ngOnInit(){
     this.vehicles = this.globalService.GetAllModel(this.model)
     console.log(this.vehicles);
-    this.vehiclesFiltered = this.globalService.GetAllModel(this.model)
     this.filter = new FormControl('');
     this.filter$ = this.filter.valueChanges.pipe(startWith(''));
     this.vehiclesFiltered = combineLatest(this.vehicles, this.filter$).pipe(
@@ -297,6 +303,27 @@ export class VehicleComponent implements OnDestroy {
     document.title = 'Vehículos';
     localStorage.setItem("vehicles", JSON.stringify(this.vehiclesFiltered));
   }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(PagesFormsComponent, {
+      width: '350px',
+      data: {data: this.newVehicle, template: 'vehicles' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.newVehicle = result;
+      this.ngOnInit();
+    });
+  }
+
+  deleteVehicle(id){
+    this.globalService.DeleteModel(this.model, id).subscribe(
+      (response) => console.log(response),
+    )
+    this.ngOnInit();
+  }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
     console.log(this.subscription.closed);
@@ -323,7 +350,7 @@ export class VehicleComponent implements OnDestroy {
 </div>
 </div>
 
-<a href="#" class="float">
+<a (click)="openDialog()" class="float">
 <mat-icon class="my-float" mat-list-icon>add</mat-icon> 
 </a>
 
@@ -334,7 +361,7 @@ export class VehicleComponent implements OnDestroy {
       <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6  d-inline-flex" *ngFor="let product of entriesFiltered | async" style="margin-bottom: 1.5rem;">
       <mat-list-item >
         <mat-icon mat-list-icon>departure_board</mat-icon>
-        <h4 class="main_data" mat-line>{{product.plate}}</h4>
+        <h4 class="main_data" mat-line>{{product.plate}} <small><mat-icon id="delete" (click)="deleteEntrie(product.id)">delete_outline</mat-icon></small> </h4>
         <p mat-line class="text-wrap"> {{ 'Hora de entrada: ' + product.date_arrival + ' ' +  product.hour_arrival + ', Lugar: ' + product.place}} </p>
       </mat-list-item>
     </div>
@@ -345,7 +372,7 @@ export class VehicleComponent implements OnDestroy {
   styleUrls: ["./pages.scss"]
 
 })
-export class EntriesComponent implements OnDestroy {
+export class EntriesComponent implements OnInit, OnDestroy {
   title = 'app';
   entries: Observable<any[]>;
   entriesFiltered: Observable<any[]>;
@@ -356,15 +383,31 @@ export class EntriesComponent implements OnDestroy {
   mode = 'indeterminate';
   value = 50;
   subscription: SubscriptionLike;
+  newVehicle: Observable<any[]>;
 
   constructor(
     private globalService: GlobalThingsService,
     private http: HttpClient,
+    public dialog: MatDialog
 
-  ) {
-    this.entries = this.globalService.GetAllModel(this.model)
+  ) {  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(PagesFormsComponent, {
+      width: '350px',
+      data: {data: this.newVehicle, template: 'entries' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.newVehicle = result;
+      this.ngOnInit();
+    });
+  }
+
+  ngOnInit(){
+ this.entries = this.globalService.GetAllModel(this.model)
     console.log(this.entries);
-    this.entriesFiltered = this.globalService.GetAllModel(this.model)
     this.filter = new FormControl('');
     this.filter$ = this.filter.valueChanges.pipe(startWith(''));
     this.entriesFiltered = combineLatest(this.entries, this.filter$).pipe(
@@ -374,6 +417,13 @@ export class EntriesComponent implements OnDestroy {
     console.log("Subscription entries: " + this.subscription.closed);
     document.title = 'Vehículos';
     localStorage.setItem("entries", JSON.stringify(this.entriesFiltered));
+  }
+
+  deleteEntrie(id){
+    this.globalService.DeleteModel(this.model, id).subscribe(
+      (response) => console.log(response),
+    )
+    this.ngOnInit();
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
@@ -401,7 +451,7 @@ export class EntriesComponent implements OnDestroy {
 </div>
 </div>
 
-<a href="#" class="float">
+<a (click)="openDialog()" class="float">
 <mat-icon class="my-float" mat-list-icon>add</mat-icon> 
 </a>
 
@@ -412,7 +462,7 @@ export class EntriesComponent implements OnDestroy {
       <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6  d-inline-flex" *ngFor="let product of exitsFiltered | async" style="margin-bottom: 1.5rem;">
       <mat-list-item >
         <mat-icon mat-list-icon>airport_shuttle</mat-icon>
-        <h4 class="main_data" mat-line>{{product.get_plate}}</h4>
+        <h4 class="main_data" mat-line>{{product.get_plate}} <small><mat-icon id="delete" (click)="deleteExit(product.id)" >delete_outline</mat-icon></small></h4>
         <p mat-line class="text-wrap"> {{ 'Hora de salida: ' + product.time_exit_format + ', Tiempo total: ' +  product.total_time + ', Paga: $' + product.ammount_to_paid}} </p>
       </mat-list-item>
     </div>
@@ -423,7 +473,7 @@ export class EntriesComponent implements OnDestroy {
   styleUrls: ["./pages.scss"]
 
 })
-export class ExitsComponent implements OnDestroy {
+export class ExitsComponent implements OnInit, OnDestroy {
   title = 'app';
   exits: Observable<any[]>;
   exitsFiltered: Observable<any[]>;
@@ -434,15 +484,20 @@ export class ExitsComponent implements OnDestroy {
   mode = 'indeterminate';
   value = 50;
   subscription: SubscriptionLike;
+  newVehicle: Observable<any[]>;
 
   constructor(
     private globalService: GlobalThingsService,
     private http: HttpClient,
+    public dialog: MatDialog
 
   ) {
+   
+  }
+
+  ngOnInit(){
     this.exits = this.globalService.GetAllModel(this.model)
     console.log(this.exits);
-    this.exitsFiltered = this.globalService.GetAllModel(this.model)
     this.filter = new FormControl('');
     this.filter$ = this.filter.valueChanges.pipe(startWith(''));
     this.exitsFiltered = combineLatest(this.exits, this.filter$).pipe(
@@ -452,6 +507,27 @@ export class ExitsComponent implements OnDestroy {
     console.log("Subscription exits: " + this.subscription.closed);
     localStorage.setItem("exits", JSON.stringify(this.exitsFiltered));
   }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(PagesFormsComponent, {
+      width: '350px',
+      data: {data: this.newVehicle, template: 'exits' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.newVehicle = result;
+      this.ngOnInit();
+    });
+  }
+
+  deleteExit(id){
+    this.globalService.DeleteModel(this.model, id).subscribe(
+      (response) => console.log(response),
+    )
+    this.ngOnInit();
+  }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
     console.log(this.subscription.closed);
@@ -477,7 +553,7 @@ export class ExitsComponent implements OnDestroy {
 </div>
 </div>
 
-<a href="#" class="float">
+<a (click)="openDialog()" class="float">
 <mat-icon class="my-float" mat-list-icon>add</mat-icon> 
 </a>
 
@@ -488,7 +564,7 @@ export class ExitsComponent implements OnDestroy {
       <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6  d-inline-flex" *ngFor="let product of ratesFiltered | async" style="margin-bottom: 1.5rem;">
       <mat-list-item >
         <mat-icon mat-list-icon>monetization_on</mat-icon>
-        <h4 class="main_data" mat-line>{{product.name + ' $' + product.value  }}</h4>
+        <h4 class="main_data" mat-line>{{product.name + ' $' + product.value  }} <small><mat-icon id="delete" (click)="deleteRate(product.id)" >delete_outline</mat-icon></small></h4>
         <p mat-line class="text-wrap"> {{ product.description }} </p>
       </mat-list-item>
     </div>
@@ -510,15 +586,19 @@ export class RateComponent implements OnDestroy {
   mode = 'indeterminate';
   value = 50;
   subscription: SubscriptionLike;
+  newVehicle: Observable<any[]>;
 
   constructor(
     private globalService: GlobalThingsService,
     private http: HttpClient,
+    public dialog: MatDialog
 
-  ) {
+
+  ) {  }
+
+  ngOnInit(){
     this.rates = this.globalService.GetAllModel(this.model)
     console.log(this.rates);
-    this.ratesFiltered = this.globalService.GetAllModel(this.model)
     this.filter = new FormControl('');
     this.filter$ = this.filter.valueChanges.pipe(startWith(''));
     this.ratesFiltered = combineLatest(this.rates, this.filter$).pipe(
@@ -528,6 +608,27 @@ export class RateComponent implements OnDestroy {
     console.log("Subscription rates: " + this.subscription.closed);
     localStorage.setItem("rates", JSON.stringify(this.ratesFiltered));
   }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(PagesFormsComponent, {
+      width: '350px',
+      data: {data: this.newVehicle, template: 'rates' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.newVehicle = result;
+      this.ngOnInit();
+    });
+  }
+
+  deleteRate(id){
+    this.globalService.DeleteModel(this.model, id).subscribe(
+      (response) => console.log(response),
+    )
+    this.ngOnInit();
+  }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
     console.log(this.subscription.closed);

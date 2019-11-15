@@ -23,7 +23,7 @@ export class AppComponent {
 
       this.swUpdate.available.subscribe(() => {
 
-          if(confirm("New version available. Load New Version?")) {
+          if(confirm("Hay una nueva versión disponible, recargar ahora?")) {
 
               window.location.reload();
           }
