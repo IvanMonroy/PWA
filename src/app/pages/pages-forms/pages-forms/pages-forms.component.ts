@@ -83,7 +83,7 @@ export class PagesFormsComponent implements OnInit {
         formData.append("plate", this.form.get('plate').value);
         formData.append("brand", this.form.get('brand').value);
         formData.append("year", this.form.get('year').value);
-        this.http.post('http://powerful-brushlands-67246.herokuapp.com/api/vehicles', formData).subscribe(
+        this.http.post('https://powerful-brushlands-67246.herokuapp.com/api/vehicles', formData).subscribe(
           (response) => this.openResponse(response['message']),
         )
         this.closeDialog();
@@ -92,7 +92,7 @@ export class PagesFormsComponent implements OnInit {
         formData.append("plate", this.form.get('plate').value);
         formData.append("hour_arrival", this.form.get('hour_arrival').value);
         formData.append("place", this.form.get('place').value);
-        this.http.post('http://powerful-brushlands-67246.herokuapp.com/api/entries', formData).subscribe(
+        this.http.post('https://powerful-brushlands-67246.herokuapp.com/api/entries', formData).subscribe(
           (response) => this.openResponse(response['message']),
         )
         this.closeDialog();
@@ -104,7 +104,7 @@ export class PagesFormsComponent implements OnInit {
         formData.append("date_departure", this.form.get('date_departure').value);
         formData.append("hour_departure", this.form.get('hour_departure').value);
         formData.append("rate_id", this.form.get('rate_id').value);
-        this.http.post('http://powerful-brushlands-67246.herokuapp.com/api/exits', formData).subscribe(
+        this.http.post('https://powerful-brushlands-67246.herokuapp.com/api/exits', formData).subscribe(
           (response) => this.openResponse(response['message']),
         )
         this.closeDialog();
@@ -117,7 +117,7 @@ export class PagesFormsComponent implements OnInit {
         formData.append("description", this.form.get('description').value);
         formData.append("date_begin", this.form.get('date_begin').value);
         formData.append("date_end", this.form.get('date_end').value);
-        this.http.post('http://powerful-brushlands-67246.herokuapp.com/api/rates', formData).subscribe(
+        this.http.post('https://powerful-brushlands-67246.herokuapp.com/api/rates', formData).subscribe(
           (response) => this.openResponse(response['message']),
         )
         this.closeDialog();
