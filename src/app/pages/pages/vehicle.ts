@@ -209,7 +209,7 @@ export class IndexComponent implements OnDestroy {
   color = 'primary';
   mode = 'indeterminate';
   value = 50;
-  statistics = [];
+  statistics: any;
   subscription: SubscriptionLike;
   constructor(
     private dashboardService: DashboardService,
