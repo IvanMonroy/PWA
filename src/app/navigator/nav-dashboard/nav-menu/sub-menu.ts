@@ -166,3 +166,35 @@ export class DialogOverviewExampleDialog {
     this.dialogRef.close();
   }
 }
+
+
+@Component({
+  selector: "message-response",
+  template: `
+    <h1 mat-dialog-title>Información</h1>
+    <div mat-dialog-content>
+      <p>{{message}}</p>
+      
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="onNoClick()">Ok</button>
+    </div>
+  `,
+  styleUrls: ["./nav-menu.component.scss"]
+})
+export class MessageResponse {
+  message: any;
+  constructor(
+    public dialogRef: MatDialogRef<MessageResponse>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) {
+      this.message = data['message']
+      console.log(data);
+
+
+    }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+}

@@ -1,0 +1,101 @@
+<h4><small> Nuevo registro </small>
+    <mat-icon style="color: #3766ad" mat-list-icon>plus_one</mat-icon>
+</h4>
+
+<div *ngIf="data.template != null && data.template == 'vehicles'; then vehicles"></div>
+<div *ngIf="data.template != null && data.template == 'entries'; then entries"></div>
+<div *ngIf="data.template != null && data.template == 'exits'; then exits"></div>
+<div *ngIf="data.template != null && data.template == 'rates'; then rates"></div>
+
+<div mat-dialog-content>
+    <ng-template #vehicles>
+        <form [formGroup]="form" (ngSubmit)="submitForm()">
+            <mat-form-field>
+                <input matInput placeholder="Placa" formControlName="plate">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Marca" formControlName="brand">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="number" placeholder="Año" formControlName="year">
+            </mat-form-field>
+            <div mat-dialog-actions>
+                <button mat-button cdkFocusInitial style="margin-right: 0.5rem;">Guardar</button>
+                <button mat-button (click)="closeDialog()">Cancelar</button>
+            </div>
+        </form>
+    </ng-template>
+    <ng-template #entries>
+        <form [formGroup]="form" (ngSubmit)="submitForm()">
+            <mat-form-field>
+                <input matInput placeholder="Placa" formControlName="plate">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="time" placeholder="Hora de entrada" formControlName="hour_arrival">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Lugar" formControlName="place">
+            </mat-form-field>
+            <div mat-dialog-actions>
+                <button mat-button cdkFocusInitial style="margin-right: 0.5rem;">Guardar</button>
+                <button mat-button (click)="closeDialog()">Cancelar</button>
+            </div>
+        </form>
+    </ng-template>
+    <ng-template #exits>
+        <form [formGroup]="form" (ngSubmit)="submitForm()">
+            <mat-form-field>
+                <input type="text" placeholder="Entrada" matInput [matAutocomplete]="auto" formControlName="entry_id">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option  *ngFor="let entry of dataEntries | async" [value]="entry.id" >
+                        {{entry.plate }}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="date" placeholder="Fecha de salida" formControlName="date_departure">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="time" placeholder="Hora de salida" formControlName="hour_departure">
+            </mat-form-field>
+            <mat-form-field>
+                <input type="text" placeholder="Tarifa" matInput [matAutocomplete]="auto1" formControlName="rate_id">
+                <mat-autocomplete #auto1="matAutocomplete">
+                    <mat-option  *ngFor="let rate of dataRates | async" [value]="rate.id" >
+                        {{rate.name + ' ' + rate.value }}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+            <div mat-dialog-actions>
+                <button mat-button cdkFocusInitial style="margin-right: 0.5rem;">Guardar</button>
+                <button mat-button (click)="closeDialog()">Cancelar</button>
+            </div>
+        </form>
+    </ng-template>
+    <ng-template #rates>
+        <form [formGroup]="form" (ngSubmit)="submitForm()">
+            <mat-form-field>
+                <input matInput type="number" placeholder="Precio por minuto" formControlName="value">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Nombre" formControlName="name">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Descripción" formControlName="description">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="date" placeholder="Fecha inicio" formControlName="date_begin">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="date" placeholder="Fecha final" formControlName="date_end">
+            </mat-form-field>
+            <div mat-dialog-actions>
+                <button mat-button cdkFocusInitial style="margin-right: 0.5rem;">Guardar</button>
+                <button mat-button (click)="closeDialog()">Cancelar</button>
+            </div>
+        </form>
+    </ng-template>
+</div>
+<div mat-dialog-actions>
+
+</div>

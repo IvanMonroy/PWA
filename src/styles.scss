@@ -90,5 +90,7 @@ h1.example-app-name {
 .mat-drawer {
     background-color: #424242;
 }
-
+.mat-autocomplete-panel{
+    background: #303030 !important; 
+  }
 @import "~bootstrap/dist/css/bootstrap.css";
