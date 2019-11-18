@@ -1,11 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { GlobalThingsService } from '../../../services/global/global-things.service';
 import { MessageResponse } from 'src/app/navigator/nav-dashboard/nav-menu/sub-menu';
 import { reduce, map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, SubscriptionLike } from 'rxjs';
 
 @Component({
   selector: 'app-pages-forms',
@@ -19,6 +19,7 @@ export class PagesFormsComponent implements OnInit {
   dataEntries: Observable<any[]>;
   rates: Observable<any[]>;
   dataRates: Observable<any[]>;
+  subscription: SubscriptionLike[] = [];
   constructor(
     public dialogRef: MatDialogRef<PagesFormsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -46,14 +47,16 @@ export class PagesFormsComponent implements OnInit {
         });
         break;
       case 'exits':
-          this.entries = this.globalThingsService.GetAllModel('entries')
-          this.dataEntries = this.entries.pipe(
-            map((entries) => entries['data'])
-          )
-          this.rates = this.globalThingsService.GetAllModel('rates')
-          this.dataRates = this.rates.pipe(
-            map((rates) => rates['data'])
-          )
+        this.entries = this.globalThingsService.GetAllModel('entries')
+        this.subscription.push(this.entries.subscribe());
+        this.dataEntries = this.entries.pipe(
+          map((entries) => entries['data'])
+        )
+        this.rates = this.globalThingsService.GetAllModel('rates')
+        this.subscription.push(this.rates.subscribe());
+        this.dataRates = this.rates.pipe(
+          map((rates) => rates['data'])
+        )
         this.form = this.formBuilder.group({
           entry_id: [''],
           date_departure: [''],
@@ -133,7 +136,7 @@ export class PagesFormsComponent implements OnInit {
   openResponse(message): void {
     const dialogRef = this.dialog.open(MessageResponse, {
       width: '250px',
-      data: {message: message}
+      data: { message: message }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -143,5 +146,9 @@ export class PagesFormsComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  ngOnDestroy() {
+    for (const subscriptions of this.subscription) {
+      subscriptions.unsubscribe();
+    }
+  }
 }
