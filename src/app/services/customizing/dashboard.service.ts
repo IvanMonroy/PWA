@@ -8,7 +8,7 @@ import { retry, catchError } from 'rxjs/operators';
 })
 export class DashboardService {
 
-  baseurl =  'http://powerful-brushlands-67246.herokuapp.com/api/exits/';
+  baseurl =  'https://powerful-brushlands-67246.herokuapp.com/api/exits/';
   
   // Base url
 

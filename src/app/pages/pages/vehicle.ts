@@ -22,6 +22,7 @@ const httpOptions = {
   selector: 'app-index',
   template: `
   <div class=" img-fluid jumbotron" style="background: url('../../assets/icons/night_city_city_lights_underground_136558_1920x1080.jpg')fixed" >
+
   <h1 class="display-4">Bienvenido, HR Parking!</h1>
   <p class="lead">Encuentra de manera fácil un espacio seguro para tu vehículo en la red de parqueaderos HR.</p>
   <hr class="my-4">
