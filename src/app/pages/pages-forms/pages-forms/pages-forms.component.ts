@@ -142,7 +142,6 @@ export class PagesFormsComponent implements OnInit {
   ngOnDestroy() {
     for (const subscriptions of this.subscription) {
       subscriptions.unsubscribe();
-      console.log(subscriptions.closed)
     }
   }
 }
