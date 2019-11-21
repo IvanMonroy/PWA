@@ -26,7 +26,7 @@ import {
           >notification_important</mat-icon
         >
       </button>
-      <button mat-icon-button (click)="openDialog(null)">
+      <button mat-icon-button (click)="openDialog()">
         <mat-icon mat-icon-button class="example-icon" aria-hidden="false"
           >exit_to_app</mat-icon
         >
