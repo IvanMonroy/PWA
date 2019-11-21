@@ -82,47 +82,34 @@ export class PagesFormsComponent implements OnInit {
     var formData: any = new FormData();
     switch (this.template) {
       case 'vehicles':
-        console.log('vehicles');
         formData.append("plate", this.form.get('plate').value);
         formData.append("brand", this.form.get('brand').value);
         formData.append("year", this.form.get('year').value);
-        this.http.post('https://powerful-brushlands-67246.herokuapp.com/api/vehicles', formData).subscribe(
-          (response) => this.openResponse(response['message']),
-        )
+        this.postData('vehicles', formData)
         this.closeDialog();
         break;
       case 'entries':
         formData.append("plate", this.form.get('plate').value);
         formData.append("hour_arrival", this.form.get('hour_arrival').value);
         formData.append("place", this.form.get('place').value);
-        this.http.post('https://powerful-brushlands-67246.herokuapp.com/api/entries', formData).subscribe(
-          (response) => this.openResponse(response['message']),
-        )
+        this.postData('entries', formData)
         this.closeDialog();
         break;
       case 'exits':
-        console.log('exits');
-
         formData.append("entry_id", this.form.get('entry_id').value);
         formData.append("date_departure", this.form.get('date_departure').value);
         formData.append("hour_departure", this.form.get('hour_departure').value);
         formData.append("rate_id", this.form.get('rate_id').value);
-        this.http.post('https://powerful-brushlands-67246.herokuapp.com/api/exits', formData).subscribe(
-          (response) => this.openResponse(response['message']),
-        )
+        this.postData('exits', formData)
         this.closeDialog();
         break;
       case 'rates':
-        console.log('rates');
-
         formData.append("value", this.form.get('value').value);
         formData.append("name", this.form.get('name').value);
         formData.append("description", this.form.get('description').value);
         formData.append("date_begin", this.form.get('date_begin').value);
         formData.append("date_end", this.form.get('date_end').value);
-        this.http.post('https://powerful-brushlands-67246.herokuapp.com/api/rates', formData).subscribe(
-          (response) => this.openResponse(response['message']),
-        )
+        this.postData('rates', formData)
         this.closeDialog();
         break;
     }
@@ -143,6 +130,12 @@ export class PagesFormsComponent implements OnInit {
       console.log('The dialog was closed');
     });
   }
+
+  postData(model, data){
+    this.http.post('https://powerful-brushlands-67246.herokuapp.com/api/' + model, data).subscribe(
+      (response) => this.openResponse(response['message']))
+      }
+  
 
   ngOnInit() {
   }
