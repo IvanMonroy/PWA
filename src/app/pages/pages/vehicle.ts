@@ -21,7 +21,7 @@ const httpOptions = {
 @Component({
   selector: 'app-index',
   template: `
-  <div class=" img-fluid jumbotron" style="background: url('../../assets/icons/night_city_city_lights_underground_136558_1920x1080.jpg')fixed" >
+  <div class=" img-fluid jumbotron" style="background: url('../../../PWA/assets/icons/night_city_city_lights_underground_136558_1920x1080.jpg')fixed" >
 
   <h1 class="display-4">Bienvenido, HR Parking!</h1>
   <p class="lead">Encuentra de manera fácil un espacio seguro para tu vehículo en la red de parqueaderos HR.</p>
@@ -77,7 +77,7 @@ const httpOptions = {
 </div>
 </div>
 
-<div class=" img-fluid jumbotron text-right" style="background: url('../../assets/index_images/save-on-pig.jpg') fixed;">
+<div class=" img-fluid jumbotron text-right" style="background: url('../../../PWA/assets/index_images/save-on-pig.jpg') fixed;">
 <h1 class="display-4">Más formas de ahorrar!</h1>
 <p class="lead">Con nuestras tarifas no tienes que preocuparte por pagar un peso de más.</p>
 <p>Conoce más sobre nuestras tarifas.</p>
@@ -103,7 +103,7 @@ const httpOptions = {
 
 <div class="container-fluid"> 
 <div class="card col-xl-3 col-lg-4 col-md-5 col-sm-6 d-inline-flex" >
-  <img src="../../assets/index_images/shutterstock_601718561.jpg" class="card-img-top" alt="...">
+  <img src="../../../PWA/assets/index_images/shutterstock_601718561.jpg" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">DESPREOCÚPATE </h5>
     <p class="card-text">Con nuestra red de parqueaderos privados, te garantizamos la seguridad de tu vehículo.</p>
@@ -115,7 +115,7 @@ const httpOptions = {
 </div>
 
 <div class="card col-xl-3 col-lg-4 col-md-5 col-sm-6 d-inline-flex" >
-  <img src="../../assets/index_images/Active8me-Save-Time-Healthy-Living-Hacks-for-Busy-People.jpg" class="card-img-top" alt="...">
+  <img src="../../../PWA/assets/index_images/Active8me-Save-Time-Healthy-Living-Hacks-for-Busy-People.jpg" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">DÓNDE Y CUANDO QUIERAS</h5>
     <p class="card-text">No des más vueltas buscando parqueadero, con Queo elije donde estacionarte y vive una mejor experiencia.</p>
@@ -127,7 +127,7 @@ const httpOptions = {
   </div>
 
   <div class="card col-xl-3 col-lg-4 col-md-5 col-sm-6 d-inline-flex" >
-  <img src="../../assets/index_images/save-money.jpg" class="card-img-top" alt="...">
+  <img src="../../../PWA/assets/index_images/save-money.jpg" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">AHORRA SIEMPRE</h5>
     <p class="card-text">Haz parte de nuestra red y gana dinero arrendando tu parqueadero.</p>
@@ -139,7 +139,7 @@ const httpOptions = {
   </div>
 
   <div class="card col-xl-3 col-lg-4 col-md-5 col-sm-6 d-inline-flex" >
-  <img src="../../assets/index_images/siempre-contigo.jpg" class="card-img-top" alt="...">
+  <img src="../../../PWA/assets/index_images/siempre-contigo.jpg" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">SIEMPRE CONTIGO</h5>
     <p class="card-text">Nuestras tarifas son menores a las de los parqueaderos convencionales.</p>
@@ -151,7 +151,7 @@ const httpOptions = {
   </div>
 
   <div class="card col-xl-3 col-lg-4 col-md-5 col-sm-6 d-inline-flex" >
-  <img src="../../assets/index_images/easy.jpg" class="card-img-top" alt="...">
+  <img src="../../../PWA/assets/index_images/easy.jpg" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">FÁCIL</h5>
     <p class="card-text">Ubica el parqueadero, paga en línea y estaciona.</p>
@@ -163,7 +163,7 @@ const httpOptions = {
   </div>
 
   <div class="card col-xl-3 col-lg-4 col-md-5 col-sm-6 d-inline-flex" >
-  <img src="../../assets/index_images/parking.jpg" class="card-img-top" alt="...">
+  <img src="../../../PWA/assets/index_images/parking.jpg" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">SEIMPRE PENSANDO EN TÍ</h5>
     <p class="card-text">En Parking tu bici es bienvenida. Tenemos el sello calidad bici oro en 3 de nuestros estacionamientos.</p>
@@ -175,7 +175,7 @@ const httpOptions = {
   </div>
 
   <div class="card col-xl-3 col-lg-4 col-md-5 col-sm-6 d-inline-flex" >
-  <img src="../../assets/index_images/easy.jpg" class="card-img-top" alt="...">
+  <img src="../../../PWA/assets/index_images/easy.jpg" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">MEJOR QUE COMO LO DEJASTE</h5>
     <p class="card-text">Te ofrecemos en varios de nuestros parqueaderos la oportunidad de lavar tu carro mientras está bajo nuestro cuidado. Disfruta de este servicio y no te arrepentirás.
@@ -188,7 +188,7 @@ const httpOptions = {
   </div>
 
   <div class="card col-xl-3 col-lg-4 col-md-5 col-sm-6 d-inline-flex" >
-  <img src="../../assets/index_images/save.jpg" class="card-img-top" alt="...">
+  <img src="../../../PWA/assets/index_images/save.jpg" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">NO TE PREOCUPES POR TU CARRO </h5>
     <p class="card-text">Parking resuelve ese problema. Contamos con un equipo profesional y tecnología de punta para prestar un servicio de Valet Parking con responsabilidad.
