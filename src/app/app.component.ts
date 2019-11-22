@@ -1,4 +1,4 @@
-import { Component, ViewChild, } from "@angular/core";
+import { Component, ViewChild, AfterContentInit, AfterViewInit, } from "@angular/core";
 import { MediaMatcher } from "@angular/cdk/layout";
 import { MatSidenav } from '@angular/material';
 import { SwUpdate } from '@angular/service-worker';
@@ -8,18 +8,21 @@ import { SwUpdate } from '@angular/service-worker';
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"]
 })
-export class AppComponent {
+export class AppComponent implements AfterContentInit {
   mobileQuery: MediaQueryList;
+  isShow = true;
   @ViewChild("sidenav", { static: true }) sidenav: MatSidenav;
 
   constructor(media: MediaMatcher, private swUpdate: SwUpdate) {
     this.mobileQuery = media.matchMedia("(max-width: 600px)");
+    
   }
-
-  ngAfterViewInit(){}
-
   ngOnInit() {
-    if (this.swUpdate.isEnabled) {
+    setTimeout(() => {
+      console.log('timeout!');
+      this.isShow = !this.isShow;
+  }, 1000);
+      if (this.swUpdate.isEnabled) {
 
       this.swUpdate.available.subscribe(() => {
 
@@ -39,4 +42,8 @@ export class AppComponent {
   getMobileQuery(){
     return this.mobileQuery;
   }
+  ngAfterContentInit(){ 
+  
+  }
+
 }
