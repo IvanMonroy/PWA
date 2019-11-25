@@ -173,23 +173,77 @@ export class DialogOverviewExampleDialog {
   template: `
     <h1 mat-dialog-title>Información</h1>
     <div mat-dialog-content>
-      <p>{{message}}</p>
+    <div *ngIf="isObject; then messages; else data "> </div>
+    <ng-template #messages>
+    <p>{{message}}</p>    
+    </ng-template>  
+    
+    <ng-template #data>
+
+
+    <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Ticket #{{message.id}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Vehículo</td>
+        <td>{{message.entry.vehicle.plate}}</td>
+      </tr>
+      <tr>
+        <td>Lugar</td>
+        <td>{{message.entry.place}}</td>
+      </tr>
+      <tr>
+      <td>Hora de entrada</td>
+      <td>{{message.entry.time_entry_format}}</td>
+    </tr>
+    <tr>
+    <td>Hora de salida</td>
+    <td>{{message.time_exit_format}}</td>
+  </tr>
+  <tr>
+    <td>Tarifa</td>
+    <td>{{message.rate.name}}</td>
+  </tr>
+  <tr>
+  <td>Precio por minuto</td>
+  <td>{{message.rate.value}}</td>
+</tr>
+<tr>
+<td>Descuento</td>
+<td>{{message.discount}}</td>
+</tr>
+      <tr>
+        <td>Tiempo total</td>
+        <td>{{message.total_time}} min</td>
+      </tr>
+    </tbody>
+  </table>    
+      <h2>
+        <span class="badge"> Total: $ {{ message.ammount_to_paid }}</span>
+      </h2>   
+    </ng-template>  
       
     </div>
     <div mat-dialog-actions>
-      <button mat-button (click)="onNoClick()">Ok</button>
+      <button mat-button (click)="onNoClick()">Cerrar</button>
     </div>
   `,
   styleUrls: ["./nav-menu.component.scss"]
 })
 export class MessageResponse {
   message: any;
+  isObject: boolean;
   constructor(
     public dialogRef: MatDialogRef<MessageResponse>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {
       this.message = data['message']
-      console.log(data);
+      this.isObject = data['message'] == Object ? true : false;
+      console.log(this.data['message']);
 
 
     }

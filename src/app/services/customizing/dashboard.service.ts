@@ -30,6 +30,14 @@ export class DashboardService {
     )
   }
 
+  showTicket(id){
+    return this.http.get<any[]>(this.baseurl  + 'show_details/' + id)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    )
+  }
+
 
   // Error handling
   errorHandl(error) {

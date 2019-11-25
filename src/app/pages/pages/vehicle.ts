@@ -490,7 +490,7 @@ export class EntriesComponent implements OnInit, OnDestroy {
       <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6  d-inline-flex" *ngFor="let product of exitsFiltered | async" style="margin-bottom: 1.5rem;">
       <mat-list-item >
         <mat-icon mat-list-icon>airport_shuttle</mat-icon>
-        <h4 class="main_data" mat-line>{{product.get_plate}} <small><mat-icon id="delete" (click)="deleteExit(product.id)" >delete_outline</mat-icon></small></h4>
+        <h4 class="main_data" mat-line>{{product.get_plate}} <small><mat-icon id="delete" (click)="deleteExit(product.id)" >delete_outline</mat-icon></small> <small><mat-icon id="show_ticket" (click)="showTicket(product.id)" >receipt</mat-icon></small></h4>
         <p mat-line class="text-wrap"> {{ 'Hora de salida: ' + product.time_exit_format + ', Tiempo total: ' +  product.total_time + ', Paga: $' + product.ammount_to_paid}} </p>
       </mat-list-item>
     </div>
@@ -517,7 +517,8 @@ export class ExitsComponent implements OnInit, OnDestroy {
   constructor(
     private globalService: GlobalThingsService,
     private http: HttpClient,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private dashboardService: DashboardService
 
   ) {
    
@@ -549,16 +550,23 @@ export class ExitsComponent implements OnInit, OnDestroy {
     });
   }
 
+  showTicket(id){
+this.dashboardService.showTicket(id).subscribe(
+  (response) => response['data'] != undefined ?  this.openResponse(response['data'], '350px') : this.openResponse(response['errors'], '350px' ) ,
+)
+this.ngOnInit();
+  }
+
   deleteExit(id){
     this.globalService.DeleteModel(this.model, id).subscribe(
-      (response) => this.openResponse(response['message']),
+      (response) => this.openResponse(response['message'], '250px'),
     )
     this.ngOnInit();
   }
 
-  openResponse(message): void {
+  openResponse(message, size): void {
     const dialogRef = this.dialog.open(MessageResponse, {
-      width: '250px',
+      width: size,
       data: { message: message }
     });
 
