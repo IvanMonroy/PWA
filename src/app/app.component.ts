@@ -18,10 +18,6 @@ export class AppComponent implements AfterContentInit {
     
   }
   ngOnInit() {
-    setTimeout(() => {
-      console.log('timeout!');
-      this.isShow = !this.isShow;
-  }, 1000);
       if (this.swUpdate.isEnabled) {
 
       this.swUpdate.available.subscribe(() => {

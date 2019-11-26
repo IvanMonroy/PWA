@@ -7,7 +7,7 @@ import { retry, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class GlobalThingsService {
-  baseurl =  'https://powerful-brushlands-67246.herokuapp.com/api/';
+  baseurl =  'https://powerful-brushlands-67246.herokuapp.com/api';
   
   // Base url
 
@@ -23,10 +23,6 @@ export class GlobalThingsService {
   // POST
   CreateModel(model,data): Observable<any[]> {
     return this.http.post<any[]>(this.baseurl + '/' + model + '/', data, this.httpOptions)
-    .pipe(
-      retry(1),
-      catchError(this.errorHandl)
-    )
   }  
 
   // GET
@@ -40,7 +36,7 @@ export class GlobalThingsService {
 
   // GET
   GetAllModel(model): Observable<any[]> {
-    return this.http.get<any[]>(this.baseurl  + model + '/')
+    return this.http.get<any[]>(this.baseurl + '/' + model + '/')
     .pipe(
       retry(1),
       catchError(this.errorHandl)
@@ -59,10 +55,6 @@ export class GlobalThingsService {
   // DELETE
   DeleteModel(model,id){
     return this.http.delete<any[]>(this.baseurl + '/' + model + '/' + id, this.httpOptions)
-    .pipe(
-      retry(1),
-      catchError(this.errorHandl)
-    )
   }
 
   // Error handling

@@ -132,10 +132,13 @@ export class PagesFormsComponent implements OnInit {
   }
 
   postData(model, data){
-    this.http.post('https://powerful-brushlands-67246.herokuapp.com/api/' + model, data).subscribe(
-      (response) => this.openResponse(response['message']))
-      }
-  
+    this.http.post('https://powerful-brushlands-67246.herokuapp.com/api/' + model, data).subscribe(data => {
+      this.openResponse(data['message']);
+    }, err => {
+      this.openResponse(err['error'].errors)
+      console.log(err);
+    })
+  }
 
   ngOnInit() {
   }

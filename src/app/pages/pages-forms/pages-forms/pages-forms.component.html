@@ -2,13 +2,8 @@
     <mat-icon style="color: #3766ad" mat-list-icon>plus_one</mat-icon>
 </h4>
 
-<div *ngIf="data.template != null && data.template == 'vehicles'; then vehicles"></div>
-<div *ngIf="data.template != null && data.template == 'entries'; then entries"></div>
-<div *ngIf="data.template != null && data.template == 'exits'; then exits"></div>
-<div *ngIf="data.template != null && data.template == 'rates'; then rates"></div>
-
 <div mat-dialog-content>
-    <ng-template #vehicles>
+    <ng-template [ngIf]="data.template == 'vehicles'">
         <form [formGroup]="form">
             <mat-form-field>
                 <input matInput placeholder="Placa" formControlName="plate">
@@ -25,7 +20,7 @@
             </div>
         </form>
     </ng-template>
-    <ng-template #entries>
+    <ng-template [ngIf]="data.template == 'entries'">
         <form [formGroup]="form">
             <mat-form-field>
                 <input matInput placeholder="Placa" formControlName="plate">
@@ -42,7 +37,7 @@
             </div>
         </form>
     </ng-template>
-    <ng-template #exits>
+    <ng-template [ngIf]="data.template == 'exits'">
         <form [formGroup]="form">
             <mat-form-field>
                 <input type="text" placeholder="Entrada" matInput [matAutocomplete]="auto" formControlName="entry_id">
@@ -72,7 +67,7 @@
             </div>
         </form>
     </ng-template>
-    <ng-template #rates>
+    <ng-template [ngIf]="data.template == 'rates'">
         <form [formGroup]="form">
             <mat-form-field>
                 <input matInput type="number" placeholder="Precio por minuto" formControlName="value">
