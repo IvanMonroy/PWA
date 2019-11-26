@@ -5,22 +5,22 @@ import {VehicleComponent, EntriesComponent, ExitsComponent, RateComponent, Index
 const routes: Routes = [{
   path: "vehicles",
   component: VehicleComponent,
-  data: { title: "Vehículos" }
+  data: { title: "Vehículos", items_icon: 'directions_car', model: 'vehicles' }
 },
 {
   path: "entries",
-  component: EntriesComponent,
-  data: { title: "Entradas" }
+  component: VehicleComponent,
+  data: { title: "Entradas", items_icon: 'departure_board', model: 'entries' }
 },
 {
   path: "exits",
-  component: ExitsComponent,
-  data: { title: "Salidas" }
+  component: VehicleComponent,
+  data: { title: "Salidas", items_icon: 'airport_shuttle', model: 'exits' }
 },
 {
   path: "rates",
-  component: RateComponent,
-  data: { title: "Tarifas" }
+  component: VehicleComponent,
+  data: { title: "Tarifas", items_icon: 'monetization_on', model: 'rates' }
 },
 {
   path: "",
