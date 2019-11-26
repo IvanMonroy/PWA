@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material';
 import { PagesFormsComponent } from '../pages-forms/pages-forms/pages-forms.component';
 import { MessageResponse } from 'src/app/navigator/nav-dashboard/nav-menu/sub-menu';
 import { ActivatedRoute } from '@angular/router';
+import { error } from 'util';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -215,7 +216,6 @@ const httpOptions = {
 })
 export class IndexComponent implements OnDestroy {
   title = 'app';
-  model = 'vehicles';
   color = 'primary';
   mode = 'indeterminate';
   value = 50;
@@ -251,7 +251,7 @@ export class IndexComponent implements OnDestroy {
 </div>
 
 <div class="container">
-    <div *ngIf="undefined === vehiclesFiltered">
+    <div *ngIf="undefined === dataFiltered">
         <mat-progress-spinner class="example-margin" [mode]="mode" [value]="value">
         </mat-progress-spinner>
     </div>
@@ -259,26 +259,26 @@ export class IndexComponent implements OnDestroy {
 <a (click)="openDialog()" class="float">
     <mat-icon class="my-float" mat-list-icon>add</mat-icon>
 </a>
-<div *ngIf="undefined !== vehiclesFiltered" class="container-fluid">
+<div *ngIf="undefined !== dataFiltered" class="container-fluid">
     <div class="row">
         <mat-list class="col-12">
             <h3 mat-subheader>{{tittle}} </h3>
             <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6  d-inline-flex"
-                *ngFor="let product of vehiclesFiltered | async" style="margin-bottom: 1.5rem;">
+                *ngFor="let product of dataFiltered | async" style="margin-bottom: 1.5rem;">
                 <mat-list-item>
                     <mat-icon mat-list-icon>{{icon}}</mat-icon>
                     <div class="mat-list-text">
                         <ng-template [ngIf]="model == 'vehicles'">
 
                             <h4 class="main_data" mat-line>{{product.plate}} <small>
-                                    <mat-icon id="delete" (click)="deleteVehicle(product.id)">delete_outline</mat-icon>
+                                    <mat-icon id="delete" (click)="deleteRegister(product.id)">delete_outline</mat-icon>
                                 </small></h4>
                             <p mat-line class="text-wrap"> {{ 'Marca: ' + product.brand}} </p>
                             <p mat-line class="text-wrap"> {{ 'Cantidad entradas: ' + product.total_entries}} </p>
                         </ng-template>
                         <ng-template [ngIf]="model == 'entries'">
                             <h4 class="main_data" mat-line>{{product.plate}} <small>
-                                    <mat-icon id="delete" (click)="deleteEntrie(product.id)">delete_outline</mat-icon>
+                                    <mat-icon id="delete" (click)="deleteRegister(product.id)">delete_outline</mat-icon>
                                 </small> </h4>
                             <p mat-line class="text-wrap">
                                 {{ 'Hora de entrada: ' + product.date_arrival + ' ' +  product.hour_arrival + ', Lugar: ' + product.place}}
@@ -286,7 +286,7 @@ export class IndexComponent implements OnDestroy {
                         </ng-template>
                         <ng-template [ngIf]="model == 'exits'">
                             <h4 class="main_data" mat-line>{{product.get_plate}} <small>
-                                    <mat-icon id="delete" (click)="deleteExit(product.id)">delete_outline</mat-icon>
+                                    <mat-icon id="delete" (click)="deleteRegister(product.id)">delete_outline</mat-icon>
                                 </small> <small>
                                     <mat-icon id="show_ticket" (click)="showTicket(product.id)">receipt</mat-icon>
                                 </small></h4>
@@ -296,7 +296,7 @@ export class IndexComponent implements OnDestroy {
                         </ng-template>
                         <ng-template [ngIf]="model == 'rates'">
                             <h4 class="main_data" mat-line>{{product.name + ' $' + product.value  }} <small>
-                                    <mat-icon id="delete" (click)="deleteRate(product.id)">delete_outline</mat-icon>
+                                    <mat-icon id="delete" (click)="deleteRegister(product.id)">delete_outline</mat-icon>
                                 </small></h4>
                             <p mat-line class="text-wrap"> {{ product.description }} </p>
                         </ng-template>
@@ -312,8 +312,8 @@ export class IndexComponent implements OnDestroy {
 })
 export class VehicleComponent implements OnInit, OnDestroy {
   title = 'app';
-  vehicles: Observable<any[]>;
-  vehiclesFiltered: Observable<any[]>;
+  data: Observable<any[]>;
+  dataFiltered: Observable<any[]>;
   filter: FormControl;
   filter$: Observable<string>;
   model: string;
@@ -341,18 +341,20 @@ export class VehicleComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.vehicles = this.globalService.GetAllModel(this.model)
-    console.log(this.vehicles);
+    this.data = this.globalService.GetAllModel(this.model)
+    console.log(this.data);
     this.filter = new FormControl('');
     this.filter$ = this.filter.valueChanges.pipe(startWith(''));
-    this.vehiclesFiltered = combineLatest(this.vehicles, this.filter$).pipe(
-      map(([vehicles, filterString]) => vehicles['data']
-        .filter(vehicle =>
-          this.model == 'rates' ? vehicle.name.indexOf(filterString) !== -1 : this.model == 'exits' ? vehicle.get_plate.indexOf(filterString) !== -1 : vehicle.plate.indexOf(filterString) !== -1
+    this.dataFiltered = combineLatest(this.data, this.filter$).pipe(
+      map(([datas, filterString]) => datas['data']
+        .filter(data =>
+          this.model == 'rates' ?
+          data.name.indexOf(filterString) !== -1 : this.model == 'exits' ?
+          data.get_plate.indexOf(filterString) !== -1 : data.plate.indexOf(filterString) !== -1
         ))
     )
-    this.subscription = this.vehicles.subscribe()
-    console.log("Subscription vehicles: " + this.subscription.closed);
+    this.subscription = this.data.subscribe()
+    console.log("Subscription " + this.tittle + this.subscription.closed);
 
   }
 
@@ -366,19 +368,21 @@ export class VehicleComponent implements OnInit, OnDestroy {
   openDialog(): void {
     const dialogRef = this.dialog.open(PagesFormsComponent, {
       width: '350px',
-      data: { data: this.newVehicle, template: this.model }
+      data: { data: null, template: this.model }
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.newVehicle = result;
       this.ngOnInit();
     });
   }
 
-
-  deleteVehicle(id) {
-    this.globalService.DeleteModel(this.model, id).subscribe(
-      (response) => this.openResponse(response['message'], '250px'))
+  deleteRegister(id) {
+    this.globalService.DeleteModel(this.model, id).subscribe(data => {
+      this.openResponse(data['message'], '250px');
+    }, err => {
+      this.openResponse(err['error'].errors, '250px')
+      console.log(err);
+    })
     this.ngOnInit();
   }
 
@@ -401,349 +405,3 @@ export class VehicleComponent implements OnInit, OnDestroy {
 }
 
 
-
-@Component({
-  selector: 'app-entries',
-  template: `
-  <div class="container-fluid">  
-<mat-form-field appearance="legacy">
-<mat-label class="span_color_black">Buscar por placa</mat-label>
-<input matInput [name]="filter" [formControl]="filter" placeholder="AAA-123" autocomplete="off" data-toggle="tooltip" data-placement="right" title="El formulario es sensible a máyusculas y mínusculas.">
-</mat-form-field>
-</div>
-
-<div class="container">
-<div *ngIf="undefined === entriesFiltered">
-<mat-progress-spinner class="example-margin" [mode]="mode" [value]="value">
-</mat-progress-spinner>
-</div>
-</div>
-
-<a (click)="openDialog()" class="float">
-<mat-icon class="my-float" mat-list-icon>add</mat-icon> 
-</a>
-
-<div *ngIf="undefined !== entriesFiltered" class="container-fluid">
-<div class="row">  
-<mat-list class="col-12">
-      <h3 mat-subheader>Entradas </h3>
-      <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6  d-inline-flex" *ngFor="let product of entriesFiltered | async" style="margin-bottom: 1.5rem;">
-      <mat-list-item >
-        <mat-icon mat-list-icon>departure_board</mat-icon>
-        <h4 class="main_data" mat-line>{{product.plate}} <small><mat-icon id="delete" (click)="deleteEntrie(product.id)">delete_outline</mat-icon></small> </h4>
-        <p mat-line class="text-wrap"> {{ 'Hora de entrada: ' + product.date_arrival + ' ' +  product.hour_arrival + ', Lugar: ' + product.place}} </p>
-      </mat-list-item>
-    </div>
-    </mat-list>
-  </div>
-</div>
-  `,
-  styleUrls: ["./pages.scss"]
-
-})
-export class EntriesComponent implements OnInit, OnDestroy {
-  title = 'app';
-  entries: Observable<any[]>;
-  entriesFiltered: Observable<any[]>;
-  filter: FormControl;
-  filter$: Observable<string>;
-  model = 'entries';
-  color = 'primary';
-  mode = 'indeterminate';
-  value = 50;
-  subscription: SubscriptionLike;
-  newVehicle: Observable<any[]>;
-
-  constructor(
-    private globalService: GlobalThingsService,
-    private http: HttpClient,
-    public dialog: MatDialog
-
-  ) { }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(PagesFormsComponent, {
-      width: '350px',
-      data: { data: this.newVehicle, template: 'entries' }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.newVehicle = result;
-      this.ngOnInit();
-    });
-  }
-
-  ngOnInit() {
-    this.entries = this.globalService.GetAllModel(this.model)
-    console.log(this.entries);
-    this.filter = new FormControl('');
-    this.filter$ = this.filter.valueChanges.pipe(startWith(''));
-    this.entriesFiltered = combineLatest(this.entries, this.filter$).pipe(
-      map(([entries, filterString]) => entries['data'].filter(entrie => entrie.plate.indexOf(filterString) !== -1))
-    )
-    this.subscription = this.entries.subscribe()
-    console.log("Subscription entries: " + this.subscription.closed);
-    document.title = 'Vehículos';
-
-  }
-
-  deleteEntrie(id) {
-    this.globalService.DeleteModel(this.model, id).subscribe(
-      (response) => this.openResponse(response['message']),
-    )
-    this.ngOnInit();
-  }
-
-
-  openResponse(message): void {
-    const dialogRef = this.dialog.open(MessageResponse, {
-      width: '250px',
-      data: { message: message }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-    console.log(this.subscription.closed);
-  }
-
-}
-
-
-
-@Component({
-  selector: 'app-exits',
-  template: `
-  <div class="container-fluid">  
-<mat-form-field appearance="legacy">
-<mat-label class="span_color_black">Buscar por placa</mat-label>
-<input matInput [name]="filter" [formControl]="filter" placeholder="AAA-123" autocomplete="off" data-toggle="tooltip" data-placement="right" title="El formulario es sensible a máyusculas y mínusculas.">
-</mat-form-field>
-</div>
-
-<div class="container">
-<div *ngIf="undefined === exitsFiltered">
-<mat-progress-spinner class="example-margin" [mode]="mode" [value]="value">
-</mat-progress-spinner>
-</div>
-</div>
-
-<a (click)="openDialog()" class="float">
-<mat-icon class="my-float" mat-list-icon>add</mat-icon> 
-</a>
-
-<div *ngIf="undefined !== exitsFiltered" class="container-fluid">
-<div class="row">  
-<mat-list class="col-12">
-      <h3 mat-subheader>Salidas </h3>
-      <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6  d-inline-flex" *ngFor="let product of exitsFiltered | async" style="margin-bottom: 1.5rem;">
-      <mat-list-item >
-        <mat-icon mat-list-icon>airport_shuttle</mat-icon>
-        <h4 class="main_data" mat-line>{{product.get_plate}} <small><mat-icon id="delete" (click)="deleteExit(product.id)" >delete_outline</mat-icon></small> <small><mat-icon id="show_ticket" (click)="showTicket(product.id)" >receipt</mat-icon></small></h4>
-        <p mat-line class="text-wrap"> {{ 'Hora de salida: ' + product.time_exit_format + ', Tiempo total: ' +  product.total_time + ', Paga: $' + product.ammount_to_paid}} </p>
-      </mat-list-item>
-    </div>
-    </mat-list>
-  </div>
-</div>
-  `,
-  styleUrls: ["./pages.scss"]
-
-})
-export class ExitsComponent implements OnInit, OnDestroy {
-  title = 'app';
-  exits: Observable<any[]>;
-  exitsFiltered: Observable<any[]>;
-  filter: FormControl;
-  filter$: Observable<string>;
-  model = 'exits';
-  color = 'primary';
-  mode = 'indeterminate';
-  value = 50;
-  subscription: SubscriptionLike;
-  newVehicle: Observable<any[]>;
-
-  constructor(
-    private globalService: GlobalThingsService,
-    private http: HttpClient,
-    public dialog: MatDialog,
-    private dashboardService: DashboardService,
-  ) {
-
-  }
-
-  ngOnInit() {
-    this.exits = this.globalService.GetAllModel(this.model)
-    console.log(this.exits);
-    this.filter = new FormControl('');
-    this.filter$ = this.filter.valueChanges.pipe(startWith(''));
-    this.exitsFiltered = combineLatest(this.exits, this.filter$).pipe(
-      map(([exits, filterString]) => exits['data'].filter(exit => exit.get_plate.indexOf(filterString) !== -1))
-    )
-    this.subscription = this.exits.subscribe()
-    console.log("Subscription exits: " + this.subscription.closed);
-
-  }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(PagesFormsComponent, {
-      width: '350px',
-      data: { data: this.newVehicle, template: 'exits' }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.newVehicle = result;
-      this.ngOnInit();
-    });
-  }
-
-  showTicket(id) {
-    this.dashboardService.showTicket(id).subscribe(
-      (response) => response['data'] != undefined ? this.openResponse(response['data'], '350px') : this.openResponse(response['errors'], '350px') ,
-    )
-    this.ngOnInit();
-  }
-
-  deleteExit(id) {
-    this.globalService.DeleteModel(this.model, id).subscribe(
-      (response) => this.openResponse(response['message'], '250px'),
-    )
-    this.ngOnInit();
-  }
-
-  openResponse(message, size): void {
-    const dialogRef = this.dialog.open(MessageResponse, {
-      width: size,
-      data: { message: message }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-    console.log(this.subscription.closed);
-  }
-
-}
-
-
-@Component({
-  selector: 'app-rates',
-  template: `
-  <div class="container-fluid">  
-<mat-form-field appearance="legacy">
-<mat-label class="span_color_black">Buscar por nombre</mat-label>
-<input matInput [name]="filter" [formControl]="filter" placeholder="Camionetas" autocomplete="off" data-toggle="tooltip" data-placement="right" title="El formulario es sensible a máyusculas y mínusculas.">
-</mat-form-field>
-</div>
-
-<div class="container">
-<div *ngIf="undefined === ratesFiltered">
-<mat-progress-spinner class="example-margin" [mode]="mode" [value]="value">
-</mat-progress-spinner>
-</div>
-</div>
-
-<a (click)="openDialog()" class="float">
-<mat-icon class="my-float" mat-list-icon>add</mat-icon> 
-</a>
-
-<div *ngIf="undefined !== ratesFiltered" class="container-fluid">
-<div class="row">  
-<mat-list class="col-12">
-      <h3 mat-subheader>Salidas </h3>
-      <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6  d-inline-flex" *ngFor="let product of ratesFiltered | async" style="margin-bottom: 1.5rem;">
-      <mat-list-item >
-        <mat-icon mat-list-icon>monetization_on</mat-icon>
-        <h4 class="main_data" mat-line>{{product.name + ' $' + product.value  }} <small><mat-icon id="delete" (click)="deleteRate(product.id)" >delete_outline</mat-icon></small></h4>
-        <p mat-line class="text-wrap"> {{ product.description }} </p>
-      </mat-list-item>
-    </div>
-    </mat-list>
-  </div>
-</div>
-  `,
-  styleUrls: ["./pages.scss"]
-
-})
-export class RateComponent implements OnDestroy {
-  title = 'app';
-  rates: Observable<any[]>;
-  ratesFiltered: Observable<any[]>;
-  filter: FormControl;
-  filter$: Observable<string>;
-  model = 'rates';
-  color = 'primary';
-  mode = 'indeterminate';
-  value = 50;
-  subscription: SubscriptionLike;
-  newVehicle: Observable<any[]>;
-
-  constructor(
-    private globalService: GlobalThingsService,
-    private http: HttpClient,
-    public dialog: MatDialog
-
-
-  ) { }
-
-  ngOnInit() {
-    this.rates = this.globalService.GetAllModel(this.model)
-    console.log(this.rates);
-    this.filter = new FormControl('');
-    this.filter$ = this.filter.valueChanges.pipe(startWith(''));
-    this.ratesFiltered = combineLatest(this.rates, this.filter$).pipe(
-      map(([rates, filterString]) => rates['data'].filter(rate => rate.name.indexOf(filterString) !== -1))
-    )
-    this.subscription = this.rates.subscribe()
-    console.log("Subscription rates: " + this.subscription.closed);
-
-  }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(PagesFormsComponent, {
-      width: '350px',
-      data: { data: this.newVehicle, template: 'rates' }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.newVehicle = result;
-      this.ngOnInit();
-    });
-  }
-
-  deleteRate(id) {
-    this.globalService.DeleteModel(this.model, id).subscribe(
-      (response) => this.openResponse(response['message']),
-    )
-    this.ngOnInit();
-  }
-
-
-  openResponse(message): void {
-    const dialogRef = this.dialog.open(MessageResponse, {
-      width: '250px',
-      data: { message: message }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-    console.log(this.subscription.closed);
-  }
-
-}

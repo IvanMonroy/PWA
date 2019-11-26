@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {VehicleComponent, EntriesComponent, ExitsComponent, RateComponent, IndexComponent} from './pages/pages/vehicle'
+import {VehicleComponent, IndexComponent} from './pages/pages/vehicle'
 
 const routes: Routes = [{
   path: "vehicles",

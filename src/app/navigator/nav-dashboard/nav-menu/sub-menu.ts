@@ -240,7 +240,7 @@ export class MessageResponse {
   ) {
       this.message = data['message']
       this.isObject = data['message'].rate != undefined ? true : false;
-      console.log(this.isObject);
+      console.log(data['message']);
 
 
     }
